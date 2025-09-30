@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI-Powered Plant Disease Detection</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <div class="header__content">
+                <div class="header__logo">
+                    <h1>🌿 AI-Powered Plant Disease Detection</h1>
+                </div>
+                
+                <!-- Mobile Menu Toggle -->
+                <button class="mobile-menu-toggle" id="mobileMenuToggle">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+                
+                <nav class="header__nav" id="headerNav">
+                    <a href="#detection" class="nav-link active">Detection</a>
+                    <a href="#expert" class="nav-link">AI Expert</a>
+                    <a href="#treatment" class="nav-link">Treatment</a>
+                    <a href="#history" class="nav-link">History</a>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <div class="hero__content">
+                <h2 class="hero__title">Advanced Plant Health Analysis Center</h2>
+                <p class="hero__subtitle">Powered by cutting-edge AI technology for accurate disease detection and treatment recommendations</p>
+                <div class="hero__stats">
+                    <div class="stat">
+                        <div class="stat__number">250K+</div>
+                        <div class="stat__label">Images Analyzed</div>
+                    </div>
+                    <div class="stat">
+                        <div class="stat__number">150+</div>
+                        <div class="stat__label">Disease Types</div>
+                    </div>
+                    <div class="stat">
+                        <div class="stat__number">24/7</div>
+                        <div class="stat__label">AI Support</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Main Content -->
+    <main class="main">
+        <div class="container">
+            <!-- Tab Navigation -->
+            <div class="tab-nav">
+                <button class="tab-btn active" data-tab="detection">
+                    📷 Detection
+                </button>
+                <button class="tab-btn" data-tab="expert">
+                    🤖 AI Expert
+                </button>
+                <button class="tab-btn" data-tab="treatment">
+                    💊 Treatment Plans
+                </button>
+                <button class="tab-btn" data-tab="history">
+                    📋 History
+                </button>
+            </div>
+
+            <!-- Detection Tab -->
+            <div class="tab-content active" id="detection">
+                <div class="analysis-section">
+                    <div class="upload-area">
+                        <div class="card">
+                            <div class="card__body">
+                                <div class="upload-zone" id="uploadZone">
+                                    <div class="upload-zone__content">
+                                        <div class="upload-zone__icon">📷</div>
+                                        <h3>Upload or Capture Plant Image</h3>
+                                        <p>Take a photo with your device camera or upload an existing image</p>
+                                        <p class="upload-zone__info">Supports JPG, PNG, WEBP up to 10MB</p>
+                                        
+                                        <div class="upload-buttons">
+                                            <button class="btn btn--primary" id="cameraBtn">
+                                                📸 Take Photo
+                                            </button>
+                                            <button class="btn btn--secondary" onclick="document.getElementById('imageInput').click()">
+                                                📁 Choose File
+                                            </button>
+                                        </div>
+                                        
+                                        <input type="file" id="imageInput" accept="image/*" class="hidden">
+                                        <input type="file" id="cameraInput" accept="image/*" capture="environment" class="hidden">
+                                    </div>
+                                    <div class="upload-zone__preview hidden" id="imagePreview">
+                                        <img id="previewImg" alt="Preview" />
+                                        <button class="btn btn--secondary btn--sm" id="removeImage">Remove</button>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="form-label">Additional Symptoms (Optional)</label>
+                                    <textarea class="form-control" id="symptoms" rows="3" placeholder="Describe any visible symptoms, plant condition, or additional details..."></textarea>
+                                </div>
+
+                                <button class="btn btn--primary btn--lg btn--full-width" id="analyzeBtn" disabled>
+                                    🔍 Analyze Plant
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="results-area hidden" id="resultsArea">
+                        <div class="card">
+                            <div class="card__header">
+                                <h3>Analysis Results</h3>
+                            </div>
+                            <div class="card__body">
+                                <div class="analysis-results" id="analysisResults">
+                                    <!-- Results will be populated by JavaScript -->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- AI Expert Tab -->
+            <div class="tab-content" id="expert">
+                <div class="chat-interface">
+                    <div class="card">
+                        <div class="card__header">
+                            <div class="expert-info">
+                                <div class="expert-avatar">🤖</div>
+                                <div>
+                                    <h3>Dr. AgriBot</h3>
+                                    <p class="expert-status">AI Agricultural Expert • Online</p>
+                                    <div class="language-support">
+                                        <span class="language-tag">🇬🇧 English</span>
+                                        <span class="language-tag">🇮🇳 Hindi</span>
+                                        <span class="language-tag">🇮🇳 Kannada</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card__body">
+                            <div class="chat-messages" id="chatMessages">
+                                <div class="message bot-message">
+                                    <div class="message-avatar">🤖</div>
+                                    <div class="message-content">
+                                        <p><strong>Welcome! I'm Dr. AgriBot, your AI agricultural expert.</strong></p>
+                                        <p>I can help you with:</p>
+                                        <ul>
+                                            <li>🦠 Plant disease identification and treatment</li>
+                                            <li>🐛 Pest control strategies and recommendations</li>
+                                            <li>🌱 Soil health analysis and improvement</li>
+                                            <li>🚜 Farming tips and best practices</li>
+                                        </ul>
+                                        <p>How can I assist you today?</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="chat-input-area">
+                                <div class="chat-input-wrapper">
+                                    <input type="text" class="form-control" id="chatInput" placeholder="Ask me anything about plant health, diseases, or farming...">
+                                    <button class="btn btn--primary" id="sendBtn">Send</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Treatment Plans Tab -->
+            <div class="tab-content" id="treatment">
+                <div class="treatment-section">
+                    <div class="treatment-form">
+                        <div class="card">
+                            <div class="card__header">
+                                <h3>Generate Treatment Plan</h3>
+                                <p>Get customized treatment recommendations based on your specific situation</p>
+                            </div>
+                            <div class="card__body">
+                                <form id="treatmentForm">
+                                    <!-- Condition Input Method Toggle -->
+                                    <div class="form-group">
+                                        <label class="form-label">How would you like to describe your plant's condition?</label>
+                                        <div class="condition-method-toggle">
+                                            <button type="button" class="method-btn active" data-method="dropdown">
+                                                📋 Choose from List
+                                            </button>
+                                            <button type="button" class="method-btn" data-method="custom">
+                                                ✏️ Describe Your Condition
+                                            </button>
+                                        </div>
+                                    </div>
+
+                                    <!-- Dropdown Method -->
+                                    <div class="condition-input dropdown-method">
+                                        <div class="form-group">
+                                            <label class="form-label">Disease/Condition</label>
+                                            <select class="form-control" id="diseaseSelect">
+                                                <option value="">Select disease or condition</option>
+                                            </select>
+                                        </div>
+                                    </div>
+
+                                    <!-- Custom Description Method -->
+                                    <div class="condition-input custom-method hidden">
+                                        <div class="form-group">
+                                            <label class="form-label">Describe Your Plant's Condition</label>
+                                            <textarea class="form-control" id="customCondition" rows="4" placeholder="Describe the symptoms you're seeing on your plant (e.g., yellow spots on leaves, wilting, holes in leaves, powdery substance, etc.)"></textarea>
+                                            <div class="custom-condition-help">
+                                                <small>Be as detailed as possible. Include colors, patterns, affected plant parts, and when symptoms started.</small>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label class="form-label">Plant Type</label>
+                                        <select class="form-control" id="plantSelect" required>
+                                            <option value="">Select plant type</option>
+                                        </select>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label class="form-label">Disease Severity</label>
+                                        <select class="form-control" id="severitySelect" required>
+                                            <option value="">Select severity level</option>
+                                        </select>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label class="form-label">Farming Method</label>
+                                        <select class="form-control" id="farmingSelect" required>
+                                            <option value="">Select farming method</option>
+                                        </select>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label class="form-label">Additional Details (Optional)</label>
+                                        <textarea class="form-control" id="detailedSymptoms" rows="3" placeholder="Environmental conditions, recent weather, fertilization history, or any other relevant information..."></textarea>
+                                    </div>
+
+                                    <button type="submit" class="btn btn--primary btn--lg btn--full-width">
+                                        Generate Treatment Plan
+                                    </button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="treatment-results hidden" id="treatmentResults">
+                        <div class="card">
+                            <div class="card__header">
+                                <h3>Treatment Recommendations</h3>
+                            </div>
+                            <div class="card__body" id="treatmentContent">
+                                <!-- Treatment plan will be populated by JavaScript -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- History Tab -->
+            <div class="tab-content" id="history">
+                <div class="history-section">
+                    <div class="history-header">
+                        <h3>Analysis History</h3>
+                        <div class="history-filters">
+                            <select class="form-control" id="typeFilter">
+                                <option value="">All Types</option>
+                                <option value="Disease Analysis">Disease Analysis</option>
+                                <option value="Camera Analysis">Camera Analysis</option>
+                                <option value="Treatment Plan">Treatment Plan</option>
+                                <option value="Chat Session">Chat Session</option>
+                            </select>
+                            <select class="form-control" id="methodFilter">
+                                <option value="">All Methods</option>
+                                <option value="camera_capture">Camera Capture</option>
+                                <option value="custom_description">Custom Description</option>
+                                <option value="dropdown_selection">Dropdown Selection</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="history-stats">
+                        <div class="stat-card">
+                            <div class="stat-number" id="totalAnalyses">0</div>
+                            <div class="stat-label">Total Analyses</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-number" id="cameraAnalyses">0</div>
+                            <div class="stat-label">Camera Captures</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-number" id="customAnalyses">0</div>
+                            <div class="stat-label">Custom Descriptions</div>
+                        </div>
+                    </div>
+
+                    <div class="history-list" id="historyList">
+                        <!-- History items will be populated by JavaScript -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer__content">
+                <div class="footer__features">
+                    <div class="feature">
+                        <div class="feature__icon">⚡</div>
+                        <h4>Instant Detection</h4>
+                        <p>Get results in seconds with our advanced AI</p>
+                    </div>
+                    <div class="feature">
+                        <div class="feature__icon">💊</div>
+                        <h4>Treatment Plans</h4>
+                        <p>Customized recommendations for your specific needs</p>
+                    </div>
+                    <div class="feature">
+                        <div class="feature__icon">👨‍🌾</div>
+                        <h4>Expert Guidance</h4>
+                        <p>24/7 access to AI agricultural expertise</p>
+                    </div>
+                </div>
+                <div class="footer__info">
+                    <p>&copy; 2025 AI-Powered Plant Disease Detection. Advanced agricultural technology for sustainable farming.</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Loading Modal -->
+    <div class="modal hidden" id="loadingModal">
+        <div class="modal__backdrop"></div>
+        <div class="modal__content">
+            <div class="loading-spinner"></div>
+            <h3 id="loadingTitle">Analyzing Plant...</h3>
+            <p id="loadingDescription">Our AI is processing your image and symptoms</p>
+        </div>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
